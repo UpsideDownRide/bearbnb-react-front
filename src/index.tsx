@@ -5,7 +5,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { MantineProvider } from '@mantine/core';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Signup } from './Signup'
+import { Signup } from './components/Signup'
+import { Signin } from 'components/Signin';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -17,6 +18,8 @@ root.render(
         <Routes>
           <Route path="/" element={<App />}/>
           <Route path="/signup" element={<Signup />}/>
+          <Route path="/signin" element={<Signin />}/>
+          {/* <Route path="/logout" element={<Logout />}/> */}
         </Routes>
       </BrowserRouter>
     </MantineProvider>

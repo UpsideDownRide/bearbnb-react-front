@@ -1,9 +1,9 @@
 import { TextInput, Button, Group, Box, Space } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { authApiWrapper } from '_helpers/authApiWrapper';
-import { SignupRequest, Role } from './types/api/api';
+import { authApi } from '_helpers/authApiWrapper';
+import { ISignupRequest, Role } from '../types/api';
 
-type SignupFormValues = Pick<SignupRequest, 'username' | 'email' | 'password'>
+type SignupFormValues = Pick<ISignupRequest, 'username' | 'email' | 'password'>
 
 //https://html.spec.whatwg.org/multipage/input.html#valid-e-mail-address
 const VALID_EMAIL_REGEX:RegExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
@@ -19,13 +19,13 @@ function Signup() {
             email: (value) => VALID_EMAIL_REGEX.test(value) ? null : 'Invalid email',
         }
     })
-    const userRoleWrapper = (formValues: SignupFormValues): SignupRequest => { return {...formValues, 'role': [Role.User]} }
+    const userRoleWrapper = (formValues: SignupFormValues): ISignupRequest => { return {...formValues, 'role': [Role.User]} }
 
 
     return (
         <Box sx={{ maxWidth: 300 }} mx="auto">
         
-            <form onSubmit={form.onSubmit((values) => authApiWrapper().signup(userRoleWrapper(values)))}>
+            <form onSubmit={form.onSubmit((values) => authApi.signup(userRoleWrapper(values)))}>
                 <TextInput
                     required
                     label="Username"

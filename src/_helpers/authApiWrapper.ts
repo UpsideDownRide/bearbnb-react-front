@@ -1,21 +1,11 @@
-import '../types/api/api'
-import { SignupRequest } from '../types/api/api'
+import '../types/api'
+import { ISignupRequest, ILoginRequest, ILogoutRequest } from '../types/api'
 
-export function authApiWrapper() {
-    return {
-        login: login,
-        signup: signup,
-        logout: logout,
-    }
+export const authApi = {
+    login: login,
+    signup: signup,
+    logout: logout,
 }
-
-interface Credentials {
-    username: string,
-    email: string,
-    password: string,
-}
-
-
 
 const API_HOSTNAME = new URL("http://localhost:8080")
 
@@ -31,9 +21,9 @@ async function fetchWrapper(endpoint: URL, requestBody: BodyInit) {
     return response
 }
 
-async function login({ username, password }: Pick<Credentials, 'username' | 'password'>) {
+async function login(loginData: ILoginRequest) {
     const endpointURL = new URL("api/auth/signin", API_HOSTNAME)
-    const requestBody: BodyInit = JSON.stringify({ username, password })
+    const requestBody: BodyInit = JSON.stringify(loginData)
     const response = await fetchWrapper(endpointURL, requestBody)
     const json = await response.json()
     const accessToken = json.accessToken
@@ -41,14 +31,19 @@ async function login({ username, password }: Pick<Credentials, 'username' | 'pas
     return json;
 }
 
-async function signup(user: SignupRequest) {
+async function signup(signupData: ISignupRequest) {
     const endpointURL = new URL("api/auth/signup", API_HOSTNAME)
-    const requestBody: BodyInit = JSON.stringify(user)
+    const requestBody: BodyInit = JSON.stringify(signupData)
     const response = await fetchWrapper(endpointURL, requestBody)
     const json = await response.json()
     return json;
 }
 
-function logout({ username }: Pick<Credentials, 'username'>) {
-    return username;
+async function logout(logoutData: ILogoutRequest) {
+    const endpointURL = new URL("api/auth/logout", API_HOSTNAME)
+    const requestBody: BodyInit = JSON.stringify(logoutData)
+    const response = await fetchWrapper(endpointURL, requestBody)
+    const json = await response.json()
+    localStorage.removeItem("accessToken")
+    return json;
 }
