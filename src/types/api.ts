@@ -1,15 +1,35 @@
-export interface IRequest {
-    username: string,
+import { User } from "./User"
+
+export type SignupRequest = {
     email: string,
     password: string,
-    role: Array<Role>
+    dateOfBirth: string,
+    firstName: string,
+    lastName: string
+}
+export type LoginRequest = {
+    email: string,
+    password: string
 }
 
-export type ISignupRequest = IRequest
-export type ILoginRequest = Pick<IRequest, 'username' | 'password'>
-export type ILogoutRequest = Pick<IRequest, 'username'>
+export type LogoutRequest = {
+    email: string
+}
 
-export enum Role {
-    User = "user",
-    Host = "host"
+export type LoginResponse = {
+    user: User
+    token: string
+}
+
+export type SignupResponse = {
+}
+
+export type LogoutResponse = {
+}
+
+export type AddListingRequest = {
+    title: string,
+}
+
+export type AddListingResponse = {
 }

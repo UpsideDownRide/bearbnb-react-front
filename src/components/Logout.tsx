@@ -1,8 +1,10 @@
-import { authApi } from '_helpers/authApiWrapper';
-import { ILogoutRequest } from '../types/api';
+import { useUserActions } from 'actions/userActions';
+import { LogoutRequest } from '../types/api';
 
-function Logout(username: ILogoutRequest) {
-    authApi.logout(username)
+function Logout(username: LogoutRequest) {
+    const userActions = useUserActions();
+    
+    return userActions.logout(username)
 }
 
 export { Logout }

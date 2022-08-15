@@ -8,7 +8,7 @@ function AppHeader() {
             <Container size={1440} style={{height: "100%"}}>
                 <Grid gutter={0} justify="space-between" align="center" style={{height: "100%"}}>
                     <Grid.Col span={4}>
-                        <img src="bearbnb.png" alt="Bearbnb logo" height={heightLogo} />
+                        <img src="/bearbnb.png" alt="Bearbnb logo" height={heightLogo} />
                     </Grid.Col>
                     <Grid.Col span={4}>
                         <div>Search settings</div>

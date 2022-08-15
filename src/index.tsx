@@ -3,27 +3,26 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { MantineProvider } from '@mantine/core';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Signup } from 'components/Signup';
-import { Signin } from 'components/Signin';
-import { Main } from 'components/Main';
+import { BrowserRouter } from "react-router-dom";
+import { App } from 'components/App';
+import { ModalsProvider } from '@mantine/modals';
+import { RecoilRoot } from 'recoil';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <MantineProvider theme={{ colorScheme: 'light' }}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Main />}/>
-          <Route path="/signup" element={<Signup />}/>
-          <Route path="/signin" element={<Signin />}/>
-          {/* <Route path="/logout" element={<Logout />}/> */}
-        </Routes>
-      </BrowserRouter>
-    </MantineProvider>
-  </React.StrictMode>
+    <RecoilRoot>
+      <MantineProvider theme={{ colorScheme: 'light' }}>
+        <ModalsProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ModalsProvider>
+      </MantineProvider >
+    </RecoilRoot>
+  </React.StrictMode >
 );
 
 // If you want to start measuring performance in your app, pass a function
