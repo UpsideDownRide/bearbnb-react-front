@@ -1,30 +1,34 @@
 import { useState } from 'react';
-import { Stepper, Button, Group, TextInput, Code } from '@mantine/core';
+import { Stepper, Button, Group, TextInput, Code, Textarea, Select, } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useListingActions } from 'actions/listingActions';
+import { NumberInputWithSideControls } from './controls/NumberInputWithSideControls';
 
 function AddListing() {
     const [active, setActive] = useState(0);
-    
+
     const listingsActions = useListingActions();
     const handleSubmit = () => listingsActions.add(form.values)
+    const numberOfSteps = 4
 
     const form = useForm({
         initialValues: {
+            type: '',
+            bedrooms: 0,
             title: '',
         },
 
         validate: (values) => {
             if (active === 0) {
                 return {
-                    username: values.title.trim().length < 6
-                                ? 'Title must include at least 6 characters'
-                                : null,
                 };
             }
 
-            if (active === 1) {
+            if (active === 2) {
                 return {
+                    title: values.title.trim().length < 6
+                        ? 'Title must include at least 6 characters'
+                        : null,
                 };
             }
 
@@ -37,7 +41,7 @@ function AddListing() {
             if (form.validate().hasErrors) {
                 return current;
             }
-            return current < 3 ? current + 1 : current;
+            return current < numberOfSteps ? current + 1 : current;
         });
 
     const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
@@ -45,13 +49,19 @@ function AddListing() {
     return (
         <>
             <Stepper active={active} breakpoint="sm">
-                <Stepper.Step label="First step" description="Profile settings">
-                    <TextInput label="Title" placeholder="Title" {...form.getInputProps('title')} />
+                <Stepper.Step label="Accommodation type" description="">
+                    <Select data={['Entire apartment', 'Room', 'Hotel room', 'Shared room']}
+                        label="Choose accommodation type"
+                        {...form.getInputProps('type')} />
                 </Stepper.Step>
 
-                <Stepper.Step label="Second step" description="Personal information">
-                    <TextInput label="Name" placeholder="Name" {...form.getInputProps('name')} />
-                    <TextInput mt="md" label="Email" placeholder="Email" {...form.getInputProps('email')} />
+                <Stepper.Step label="Accommodation details" description="">
+                    <NumberInputWithSideControls label="Number of bedrooms" {...form.getInputProps('bedrooms')}/>
+                </Stepper.Step>
+
+                <Stepper.Step label="Listing description" description="">
+                    <TextInput label="Title" placeholder="Title" {...form.getInputProps('title')} />
+                    <Textarea label="Description" placeholder="Description" {...form.getInputProps('description')} />
                 </Stepper.Step>
 
                 <Stepper.Step label="Final step" description="Social media">
@@ -77,8 +87,8 @@ function AddListing() {
                         Back
                     </Button>
                 )}
-                {active !== 3 && <Button onClick={nextStep}>Next step</Button>}
-                {active === 3 && <Button onClick={handleSubmit}>Submit</Button>}
+                {active !== numberOfSteps && <Button onClick={nextStep}>Next step</Button>}
+                {active === numberOfSteps && <Button onClick={handleSubmit}>Submit</Button>}
             </Group>
         </>
     );
