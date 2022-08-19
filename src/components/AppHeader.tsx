@@ -11,11 +11,9 @@ function AppHeader() {
                         <img src="/bearbnb.png" alt="Bearbnb logo" height={heightLogo} />
                     </Grid.Col>
                     <Grid.Col span={4}>
-                        <div>Search settings</div>
                     </Grid.Col>
                     <Grid.Col span={4}>
                         <Grid justify="flex-end">
-                            <Grid.Col span={10}><div>Right side components</div></Grid.Col>
                             <Grid.Col span={2}><UserMenu /></Grid.Col>
                         </Grid>
                     </Grid.Col>

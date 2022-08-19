@@ -1,4 +1,4 @@
-import { Container, Grid, Footer } from '@mantine/core';
+import { Container, Grid, Footer, Text } from '@mantine/core';
 
 function AppFooter() {
     return (
@@ -6,10 +6,9 @@ function AppFooter() {
             <Container size={1440} px={0}>
                 <Grid gutter={0}> 
                     <Grid.Col span={6}>
-                        <div>Left side components</div>
+                        <Text size="lg" weight={500} style={{paddingTop: "0.5em"}} >©2022 Domirar Inc.</Text>
                     </Grid.Col>
                     <Grid.Col span={6}>
-                        <div>Right side components</div>
                     </Grid.Col>
                 </Grid>
             </Container>

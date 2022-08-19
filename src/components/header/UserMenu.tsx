@@ -9,7 +9,7 @@ function UserMenu() {
     return (
         <Menu>
             <Menu.Target>
-                <Burger size="sm" opened={opened}
+                <Burger size="sm" opened={false}
                     onClick={() => setOpened(o => !o)}
                     title={title} />
             </Menu.Target>
