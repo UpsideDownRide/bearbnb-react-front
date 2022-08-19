@@ -15,7 +15,6 @@ function Login(props: {onClick?: () => void}) {
     })
     const userActions = useUserActions();
     const clickHandler = () => {
-        console.log("here")
         userActions.login(form.values)
         props.onClick && props.onClick()
     }

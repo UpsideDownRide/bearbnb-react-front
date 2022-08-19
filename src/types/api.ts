@@ -32,4 +32,5 @@ export type AddListingRequest = {
 }
 
 export type AddListingResponse = {
+    id: string,
 }

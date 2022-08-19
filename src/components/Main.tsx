@@ -4,7 +4,7 @@ import { AppFooter } from "components/AppFooter";
 import { Route, Routes } from "react-router-dom";
 import { Signup } from "./Signup";
 import { Login } from "./Login";
-import { AddListing } from "./AddListing";
+import { AddListing } from "./listings/Add/AddListing";
 
 function Main() {
     return (
