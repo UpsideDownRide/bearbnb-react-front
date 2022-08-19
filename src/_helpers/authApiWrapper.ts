@@ -5,7 +5,7 @@ export const authApi = {
     login: login,
 }
 
-enum Methods {
+export enum Methods {
     Get = 'GET',
     Post = 'POST'
 }

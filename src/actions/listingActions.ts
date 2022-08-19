@@ -2,6 +2,8 @@
 import { fetchWrapper } from '_helpers/authApiWrapper';
 // import { listingsAtom } from 'state/listings';
 import { AddListingRequest, AddListingResponse } from 'types/api';
+import { Methods } from '../_helpers/authApiWrapper'
+import { Listing } from "../components/listings/ListingCard"
 
 async function fetchImages(files: File[], listingId: string): Promise<Response> {
     const accessToken = localStorage.getItem('accessToken');
@@ -34,10 +36,16 @@ function useListingActions() {
         return fetchImages(images, listingId)
     }
 
+    async function getAll(): Promise<Listing[]> {
+        const endpoint = "api/listings/getAll";
+        const json = fetchWrapper<Listing[]>(endpoint, Methods.Get)
+        return json;
+    }
 
     return {
         add,
-        addImages
+        addImages,
+        getAll
     }
 }
 
